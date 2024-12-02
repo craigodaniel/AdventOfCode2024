@@ -80,8 +80,6 @@ namespace AdventOfCode2024
                 Console.WriteLine(e.Message);
                 return 0;
             }
-
-            
         }
 
         private static int CountMatches(int input, int[] secondArray)

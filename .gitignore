@@ -361,4 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/AdventOfCode2024/AocInputs/day01.txt
+
+# AdventOfCode2024 Input Files
+/AdventOfCode2024/AocInputs/
