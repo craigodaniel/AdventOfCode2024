@@ -37,5 +37,25 @@ namespace AdventOfCode2024.AocLib2024
 
             return intArray;
         }
+
+        public static int[] GetIntArrayFromString(string inputString, string delimeter)
+        {
+            string[] stringArray = inputString.Split(delimeter);
+            int[] intArray = new int[stringArray.Length];
+
+            for (int i = 0; i < stringArray.Length; i++)
+            {
+                try
+                {
+                    intArray[i] = int.Parse(stringArray[i]);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return intArray;
+        }
     }
 }
