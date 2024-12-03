@@ -79,42 +79,41 @@ namespace AdventOfCode2024
 
             string line = "";
 
-            foreach (string row in lines)
+            foreach (string row in lines) // fixes broken input...it is intended to be one long string.
             {
                 line = line + row;
             }
-                int indexDo = 0;
-                int indexDont = 0;
-                string lookbehind = null;
 
-                foreach (Match match in regex.Matches(line))
+
+
+            foreach (Match match in regex.Matches(line))
+            {
+                //Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
+
+                //Search right-to-left from match index and find first don't() and do() and compare their indexs
+                string lookbehind = line.Substring(0, match.Index);
+                int indexDo = new Regex("do\\(\\)", RegexOptions.RightToLeft).Match(lookbehind).Index; //returns 0 if not found
+                int indexDont = new Regex("don't\\(\\)", RegexOptions.RightToLeft).Match(lookbehind).Index; //returns 0 if not found
+
+                // If do() comes before mul() then do the mul!
+                if (indexDo >= indexDont)
                 {
-                    //Console.WriteLine("Found '{0}' at position {1}", match.Value, match.Index);
-
-                    //Search right-to-left from match index and find first don't() and do() and compare their indexs
-                    lookbehind = line.Substring(0, match.Index);
-                    indexDo = new Regex("do\\(\\)", RegexOptions.RightToLeft).Match(lookbehind).Index; //returns 0 if not found
-                    indexDont = new Regex("don't\\(\\)", RegexOptions.RightToLeft).Match(lookbehind).Index; //returns 0 if not found
-
-                    // If do() comes before mul() then do the mul!
-                    if (indexDo >= indexDont)
-                    {
-                        string value = match.Value; // ex. 'mul(2,4)'
-                        value = value.Substring(4, value.Length - 5); // removes 'mul(' and ')'...ex. '2,4'
-                        int[] values = AocLib2024.AocLib.GetIntArrayFromString(value, ",");
+                    string value = match.Value; // ex. 'mul(2,4)'
+                    value = value.Substring(4, value.Length - 5); // removes 'mul(' and ')'...ex. '2,4'
+                    int[] values = AocLib2024.AocLib.GetIntArrayFromString(value, ",");
 
 
-                        answer += values[0] * values[1];
-                        //Console.WriteLine("indexDo: {0}, indexDont: {1}, answer + ({2}*{3}) = {4}", indexDo, indexDont, values[0], values[1], answer);
-                    }
-                    else
-                    {
-                        //Console.WriteLine("indexDo: {0}, indexDont: {1}, mul skipped!", indexDo, indexDont);
-                    }
-                    
-                    
-
+                    answer += values[0] * values[1];
+                    //Console.WriteLine("indexDo: {0}, indexDont: {1}, answer + ({2}*{3}) = {4}", indexDo, indexDont, values[0], values[1], answer);
                 }
+                else
+                {
+                    //Console.WriteLine("indexDo: {0}, indexDont: {1}, mul skipped!", indexDo, indexDont);
+                }
+                    
+                    
+
+            }
 
 
             TimeSpan elapsedTime = Stopwatch.GetElapsedTime(startTime);
