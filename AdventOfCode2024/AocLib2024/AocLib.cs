@@ -57,5 +57,20 @@ namespace AdventOfCode2024.AocLib2024
 
             return intArray;
         }
+
+        public static char[,] GetChar2dArrayFromStringArray(string[] inputs)
+        {
+            char[,] chars = new char[inputs.Length, inputs[0].Length];
+
+            for (int row = 0; row < inputs.Length; row++)
+            {
+                for (int col = 0; col < inputs[row].Length; col++)
+                {
+                    chars[row, col] = inputs[row][col];
+                }
+            }
+
+            return chars;
+        }
     }
 }
