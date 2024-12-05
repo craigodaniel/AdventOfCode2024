@@ -72,5 +72,25 @@ namespace AdventOfCode2024.AocLib2024
 
             return chars;
         }
+
+        public static List<int> GetListOfIntsFromString(string inputString, string delimeter)
+        {
+            List<int> list = new List<int>();
+            string[] stringArray = inputString.Split(delimeter);
+
+            foreach (string str in stringArray)
+            {
+                try
+                {
+                    list.Add(int.Parse(str));
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return list;
+        }
     }
 }
