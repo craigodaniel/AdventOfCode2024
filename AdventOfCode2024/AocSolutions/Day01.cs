@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,12 +11,18 @@ namespace AdventOfCode2024
 {
     public class Day01
     {
+        // --- Day 1: Historian Hysteria ---
+        // https://adventofcode.com/2024/day/1
+        //
+        // Part 1 runtime: 2.96ms. The answer is: 2196996
+        // Part 2 runtime: 2.1884ms. The answer is: 23655822
+
         public static string fileDir = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName + "\\AocInputs";
         public static string fileName = "day01.txt";
         public static string[] lines = File.ReadAllLines(fileDir + "\\" + fileName);
         public static void Part1()
         {
-            Console.WriteLine("Part1");
+            long startTime = Stopwatch.GetTimestamp();
 
             int answer = 0;
             int[] firstArray = GetNumberList(lines,0);
@@ -27,14 +35,17 @@ namespace AdventOfCode2024
             {
                 answer += Math.Abs(secondArray[i] - firstArray[i]);
             }
+
             
-            Console.WriteLine(answer);
-            
+            TimeSpan elapsedTime = Stopwatch.GetElapsedTime(startTime);
+            Console.WriteLine("Part 1 runtime: {0}ms. The answer is: {1}", elapsedTime.TotalMilliseconds, answer);
+
         }
 
         public static void Part2() 
         {
-            Console.WriteLine("Part2");
+            long startTime = Stopwatch.GetTimestamp();
+
             int answer = 0;
             int[] firstArray = GetNumberList(lines, 0);
             int[] secondArray = GetNumberList(lines, 3);
@@ -47,8 +58,8 @@ namespace AdventOfCode2024
                 answer += firstArray[i] * CountMatches(firstArray[i], secondArray);
             }
 
-            Console.WriteLine(answer);
-
+            TimeSpan elapsedTime = Stopwatch.GetElapsedTime(startTime);
+            Console.WriteLine("Part 2 runtime: {0}ms. The answer is: {1}", elapsedTime.TotalMilliseconds, answer);
         }
 
 
@@ -94,5 +105,7 @@ namespace AdventOfCode2024
             }
             return cnt;
         }
+
+
     }
 }
