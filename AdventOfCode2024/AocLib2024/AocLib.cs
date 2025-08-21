@@ -22,7 +22,7 @@ namespace AdventOfCode2024.AocLib2024
         {
             string[] stringArray = inputString.Split(" ");
             int[] intArray = new int[stringArray.Length];
-            
+
             for (int i = 0; i < stringArray.Length; i++)
             {
                 try
@@ -48,6 +48,26 @@ namespace AdventOfCode2024.AocLib2024
                 try
                 {
                     intArray[i] = int.Parse(stringArray[i]);
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return intArray;
+        }
+
+        public static int[] GetIntArrayFromCharArray(string inputString)
+        {
+            char[] chars = inputString.ToCharArray();
+            int[] intArray = new int[chars.Length];
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                try
+                {
+                    intArray[i] = int.Parse(chars[i].ToString());
                 }
                 catch (FormatException e)
                 {
@@ -91,6 +111,26 @@ namespace AdventOfCode2024.AocLib2024
             }
 
             return list;
+        }
+
+        public static int[,] GetInt2dArrayFromStringArray(string[] inputs)
+        {
+            int[,] ints = new int[inputs.Length, inputs[0].Length];
+            for (int row = 0; row < inputs.Length; row++)
+            {
+                for (int col = 0; col < inputs[row].Length; col++)
+                {
+                    try
+                    {
+                        ints[row, col] = int.Parse(inputs[row][col].ToString());
+                    }
+                    catch (FormatException e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
+            return ints;
         }
     }
 }
