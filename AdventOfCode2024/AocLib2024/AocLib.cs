@@ -113,6 +113,26 @@ namespace AdventOfCode2024.AocLib2024
             return list;
         }
 
+        public static List<long> GetListOfLongsFromString(string inputString, string delimeter)
+        {
+            List<long> list = new List<long>();
+            string[] stringArray = inputString.Split(delimeter);
+
+            foreach (string str in stringArray)
+            {
+                try
+                {
+                    list.Add(long.Parse(str));
+                }
+                catch (FormatException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return list;
+        }
+
         public static int[,] GetInt2dArrayFromStringArray(string[] inputs)
         {
             int[,] ints = new int[inputs.Length, inputs[0].Length];
