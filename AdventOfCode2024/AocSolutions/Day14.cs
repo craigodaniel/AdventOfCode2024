@@ -14,7 +14,7 @@ namespace AdventOfCode2024
         // https://adventofcode.com/2024/day/14
         //
         // Part 1 runtime: 3.2522ms. The answer is: 229980828
-        // Part 2 runtime: 
+        // Part 2 runtime: 221746.0018ms. The answer is: 7132
         //
         // Comments: 
 
